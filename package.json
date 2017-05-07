@@ -1,0 +1,19 @@
+{
+  "name": "servicio",
+  "version": "0.0.9",
+  "description": "API Rest",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcquispe/servicio.git"
+  },
+  "author": "Juan Carlos Quispe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcquispe/servicio/issues"
+  },
+  "homepage": "https://github.com/jcquispe/servicio#readme"
+}
