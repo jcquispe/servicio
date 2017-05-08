@@ -7,7 +7,7 @@ var vehiculoSchema = new Schema({
  modelo: {type: String},
  gestion: {type: Number},
  color: {type: String},
- descripcion: {type String},
+ descripcion: {type: String},
  chasis: { type: String},
  fotografia: {type: String},
  anulado: {type: Boolean},
@@ -15,4 +15,4 @@ var vehiculoSchema = new Schema({
  fecha_modificado: {type: Date}
 });
 
-module.exports = mongoose.model('Vehiculo', vehiculoSchema);
+module.exports = mongoose.model('vehiculo', vehiculoSchema);

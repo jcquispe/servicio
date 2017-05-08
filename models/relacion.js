@@ -11,4 +11,4 @@ var relacionSchema = new Schema({
  fecha_modificado: {type: Date}
 });
 
-module.exports = mongoose.model('Relacion', relacionSchema);
+module.exports = mongoose.model('relacion', relacionSchema);

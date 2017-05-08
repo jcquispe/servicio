@@ -25,36 +25,37 @@ exports.findById = function(req, res) {
 
 //POST - Inserta un registro
 exports.add = function(req, res) {
- console.log('POST');
- console.log(req.body);
- var expV = req.body.exp;
- var nombresV = req.body.nombres;
- var apellidosV = req.body.apellidos
- var chofer = new Chofer({
-	 ci: req.body.ci,
-	 exp: expV.toUpperCase(),
-	 nombres: nombresV.toUpperCase(),
-	 apellidos: apellidosV.toUpperCase(),
-	 genero: req.body.genero,
-	 fecha_nacimiento: req.body.nacimiento,
-	 anulado: false,
-	 fecha_registro: new Date(),
-	 fecha_modificado: null
- });
- chofer.save(function(err, chofer) {
- if(err) 
- 	return res.send(500, err.message);
- res.status(200).jsonp(chofer);
- });
+  console.log('POST /choferes');
+  console.log(req.body);
+	
+  var expV = req.body.exp;
+  var nombresV = req.body.nombres;
+  var apellidosV = req.body.apellidos;
+  var chofer = new Chofer({
+		  ci: req.body.ci,
+		  exp: expV.toUpperCase(),
+		  nombres: nombresV.toUpperCase(),
+		  apellidos: apellidosV.toUpperCase(),
+		  genero: req.body.genero,
+		  fecha_nacimiento: req.body.nacimiento,
+		  anulado: false,
+		  fecha_registro: new Date(),
+		  fecha_modificado: null
+  });
+  chofer.save(function(err, chofer) {
+  	if(err) 
+ 			return res.send(500, err.message);
+  	res.status(200).jsonp(chofer);
+  });
 };
 
 //PUT - Modifica un registro existente
 exports.update = function(req, res) {
-	console.log('PUT');
+	console.log('PUT /choferes/'+req.params.id);
 	console.log(req.body);
 	var expV = req.body.exp;
 	var nombresV = req.body.nombres;
-	var apellidosV = req.body.apellidos
+	var apellidosV = req.body.apellidos;
  Chofer.findById(req.params.id, function(err, chofer) {
 	 chofer.ci = req.body.ci;
 	 chofer.exp = expV.toUpperCase();
