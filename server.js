@@ -31,6 +31,12 @@ var sindicatoController = require('./controllers/sindicatoController');
 //relaciones
 var relacionModel = require('./models/relacion')(app, mongoose);
 var relacionController = require('./controllers/relacionController');
+//usuarios
+var usuarioModel = require('./models/usuario')(app, mongoose);
+var usuarioController = require('./controllers/usuarioController');
+//autorizados
+var autorizadoModel = require('./models/autorizado')(app, mongoose);
+var autorizadoController = require('./controllers/autorizadoController');
 
 //Definimos la ruta del proyecto
 var router = express.Router();
@@ -73,6 +79,24 @@ api.route('/relaciones')
 api.route('/relaciones/:id') 
  .get(relacionController.findById)
  .put(relacionController.update);
+
+//usuario
+api.route('/usuarios') 
+ .get(usuarioController.findAll)
+ .post(usuarioController.add);
+
+api.route('/usuarios/:id') 
+ .get(usuarioController.findById)
+ .put(usuarioController.update);
+
+//autorizado
+api.route('/autorizados') 
+ .get(autorizadoController.findAll)
+ .post(autorizadoController.add);
+
+api.route('/autorizados/:id') 
+ .get(autorizadoController.findById)
+ .put(autorizadoController.update);
 
 app.use('/api', api);
 

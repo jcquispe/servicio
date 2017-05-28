@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var Relacion = mongoose.model('relacion');
+var Chofer = mongoose.model('chofer');
+var Vehiculo = mongoose.model('vehiculo');
+var Sindicato = mongoose.model('sindicato');
 
 //GET - Devuelve todos
 exports.findAll = function(req, res) {
@@ -14,7 +17,11 @@ exports.findAll = function(req, res) {
 
 //GET - Devuelve solo uno
 exports.findById = function(req, res) {
- Relacion.findById(req.params.id, function(err, relaciones) {
+ Relacion.findById(req.params.id)
+	 		.populate('chofer')
+ 			.populate('vehiculo')
+ 			.populate('sindicato')
+ 			.exec(function(err, relaciones) {
  if(err) {
  	return res.send(500, err.message);
  }
@@ -28,10 +35,10 @@ exports.add = function(req, res) {
   console.log('POST /relaciones');
   console.log(req.body);
 	var relacion = new Relacion({
-		  ci_chofer: req.body.chofer,
-		  placa_vehiculo: req.body.vehiculo,
-		  codigo_sindicato: req.body.sindicato,
-		  codigo_nfc: req.body.nfc,
+			_id: req.body.nfc,  
+			chofer: req.body.chofer,
+		  vehiculo: req.body.vehiculo,
+		  sindicato: req.body.sindicato,
 		  anulado: false,
 		  fecha_registro: new Date(),
 		  fecha_modificado: null
@@ -48,10 +55,10 @@ exports.update = function(req, res) {
 	console.log('PUT /relaciones/'+req.params.id);
 	console.log(req.body);
  Relacion.findById(req.params.id, function(err, relacion) {
-	 relacion.ci_chofer = req.body.chofer;
-	 relacion.placa_vehiculo = req.body.placa;
-	 relacion.codigo_sindicato = req.body.sindicato;
-	 relacion.codigo_nfc = req.body.nfc;
+	 relacion.chofer = req.body.chofer;
+	 relacion.vehiculo = req.body.placa;
+	 relacion.sindicato = req.body.sindicato;
+	 //relacion.codigo_nfc = req.body.nfc;
 	 relacion.anulado = req.body.anulado;
 	 relacion.fecha_modificado = new Date();
 
